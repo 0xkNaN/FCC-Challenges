@@ -339,4 +339,37 @@ function sumFibs(num) {
   return _ret;
 }
 
+*Sum All Primes:
+function sumPrimes(num) {
+  var _primes = [];
+  
+  for(var _num = 0; _num <= num; _num++){
+    var _divs = [];
+    for(var _div = _num; 1 <= _div; _div--){
+      if(_num % _div === 0) _divs.push(_div);
+      if(3 <= _divs.length) break;  // this is not a prime number.
+    }
+    if(2 === _divs.length) _primes.push(_num);
+  }
+  
+  return _primes.reduce(function(a,b){ return a + b; });
+}
+
+*Finders Keepers:
+function findElement(arr, func) {
+  return arr.filter(func)[0];
+}
+
+*Drop it:
+function dropElements(arr, func) {
+  // Drop them elements.
+  var _idx = arr.indexOf(arr.filter(func)[0]);
+  return ((_idx !== -1) ? arr.slice(_idx) : []);
+}
+
+*Binary Agents:
+function binaryAgent(str) {
+  return str.split(" ").map(function(a){return String.fromCharCode(parseInt(a,2));}).join("");
+}
+
 *
