@@ -1,0 +1,342 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+    <style>
+      body{
+  margin: 0px;
+  padding: 0px;
+  background: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/symphony.png");
+}
+.container{
+  max-width: 500px;
+  margin: 30px auto 100px auto;
+  background: white;
+  padding: 5px 0px 20px 0px;
+  border-radius: 0px 30px;
+  box-shadow: -10px 10px 20px rgba(100,100,100,.8);;
+}
+img{
+  width: 100%;
+  height: 300px;
+  margin: 10px 0px 30px 0px;
+}
+.title{
+  text-align: center;
+  font-size: 40px;
+  font-family: cursive;
+  color: #ab1b1b;
+  margin: 10px 0px 20px 0px;
+}
+.quote-cntainer{
+  background-color: green;
+}
+.quote{
+  font-family: 'Raleway', sans-serif;
+  font-size: 19px;
+  max-width: 95%;
+  margin: 0 auto;
+  color: #545454;
+  padding: 0px 0px 0px 15px;
+}
+.fa-quote-left{
+  padding-left: 30px;
+  color: #ab1b1b;
+  font-size: 20px;
+}
+a, a:hover, a:focus{
+  color: #ab1b1b;
+  text-decoration: none;
+  font-weight: bold;
+}
+.t-footer{
+  
+}
+.new-quote{
+  border: 0px;
+  background: #ab1b1b;
+  float: right;
+  color: white;
+  font-size: 18px;
+  padding: 10px 5px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+.new-quote:focus{
+  outline-width: 0;
+}
+footer{
+  padding: 5px;
+  position: fixed;
+  bottom: 0px;
+  border-top: 1px solid #156;
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  font-size: 13px;
+  font-style: oblique;
+  font-weight: 700;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title"> Naruto Quotes Machine</h1>
+      <div class="quote-container row">  
+        <i class="fa fa-quote-left col-md-1"></i>
+        <p class="quote col-md-10"></p>
+      </div>
+      <h3 class="name"></h3>
+      <img class="char-img" src="http://www.iconsdb.com/icons/download/white/twitter-512.jpg" alt="test">
+<!--       <button class="tweet"> tweet </button> -->
+      <div class="t-footer">
+        <button class="new-quote"> New Quote ! </button>
+      </div>
+    </div>
+    <footer>
+      Designed and coded by <a href="https://www.freecodecamp.com/hassenrmili" target="_blank">Hassen Rmili</a>
+    </footer>
+    <script>
+      $(function() {
+  var db, url = "https://codepen.io/hassenrmili/pen/kkPvvX.js";
+  var guider = {};
+  var size = 0;
+  var db_process = false;
+  // get data
+  $.ajax({
+    url: url,
+    type: "GET",
+    dataType: "json",
+    success: function(data){
+      var key = 0;
+      var count = 0;
+      for(key in data){
+        if(data.hasOwnProperty(key)){
+          //guider.
+          var k = data[key];
+          guider[count] = {};
+          guider[count].name = k.name;
+          guider[count].quotes = k.quotes.length;
+          size++;
+          count++;
+        }
+      }
+      data.size = size;
+      db = data;
+      db_process = true;
+      //ini
+      randomize_data();
+    }
+  });
+  
+  // randomize data
+  function randomize_data(){
+    if(db_process){
+      var character, quote;
+      character = Math.floor(Math.random() * size);
+      quote = Math.floor(Math.random() * guider[character].quotes);
+    }
+    //get the random quote.
+    var random_character = db[character].name;
+    var character_img = db[character].img;
+    var random_quote = db[character].quotes[quote];
+    //...
+    console.log(random_character);
+    console.log(random_quote);
+    console.log(character_img);
+    // Rendering
+    $(".title").html(random_character);
+    $(".quote").html(random_quote);
+    $(".char-img").attr("src", character_img);
+  }
+  
+  $(".new-quote").on("click", function(){
+    if(db_process){randomize_data();}
+  });
+});
+      
+      // API
+      {
+	"0": {
+		"name": "Rock Lee",
+		"img": "http://static.comicvine.com/uploads/original/11119/111193741/4499490-9171559089-Rock_.jpg",
+		"quotes": [
+			"Stop it! How dare you disrespect an opponent that fought you with all he had!?",
+			"A hero is not the one who never falls. He is the one that who gets up, again and again, never losing sights of his dreams.",
+			"If you believe in your dreams, I will prove to you, that you can achieve your dreams just by working hard.",
+			"Wise words, Guy sensei! So simple but filled with such profound meaning!"
+		]
+	},
+	"1": {
+		"name": "Genma Shiranui",
+		"img": "https://s-media-cache-ak0.pinimg.com/originals/e6/8c/cb/e68ccb1f8d172eff43ebbab27ebd94cc.jpg",
+		"quotes": [
+			"When captured birds grow wiser, they try to open the cage with their beaks. They don't give up, because they want to fly again."
+		]
+	},
+	"2": {
+		"name": "Gaara",
+		"img": "http://data.whicdn.com/images/218713099/large.jpg",
+		"quotes": [
+			"Just because someone is important to you, it doesn't necessarily mean that person is good. Even if you knew that person was evil... People cannot win against their loneliness.",
+			"We have walked through the darkness of this world, that’s why we are able to see even a sliver of light.",
+			"If love is just a word, then why does it hurt so much if you realize it isn't there?",
+			"Family? Let me tell you what kind of link I have with them. They are just lumps of meat linked by hatred and murderous intent!",
+			"Peace under an illusion is not true peace. It's only meaningful if the real world manages to accomplish it."
+		]
+	},
+	"3": {
+		"name": "Pain",
+		"img": "http://31.media.tumblr.com/tumblr_lwy3x0Oty11qmmhnro1_500.png",
+		"quotes": [
+			"Even the most ignorant, innocent child will eventually grow up as they learn what true pain is. It affects what they say, what they think… and they become real people.",
+			"Love breeds sacrifice... which in turn breeds hatred. Then you can know pain.",
+			"Just by living, people hurt others without even realizing it. So long as humanity exists, hate will also exist. There is no peace in this cursed world. War is just a crime paid for by the pain of the defeated...",
+			"Pain is the way to bring peace.",
+			"Sometimes you must hurt in order to know, fall in order to grow, lose in order to gain because life's greatest lessons are learned through pain.",
+			"Even children are forced to grow up in the face of pain."
+		]
+	},
+	"4": {
+		"name": "Neji Hyuuga",
+		"img": "http://vignette4.wikia.nocookie.net/fear-world/images/1/18/Neji_Hyuga.png/revision/latest?cb=20140818222320",
+		"quotes": [
+			"Fear. That is what we live with. And we live it everyday. Only in death are we free of it.",
+			"The difference between stupidity and genius, is that genius has its limits."
+		]
+	},
+	"5": {
+		"name": "Itachi Uchiha",
+		"img": "http://66.media.tumblr.com/tumblr_lpusfwudZI1qmmhnro1_500.jpg",
+		"quotes": [
+			"Even the strongest of opponents always has a weakness.",
+			"He who forgives and acknowledges himself... that is what it truly means to be strong!",
+			"The ones who aren't able to acknowledge their own selves are bound to fail.",
+			"People's lives don't end when they die. It ends when they lose faith.",
+			"The village does have its dark side and its inconsistencies, but I'm still Konoha's Itachi Uchiha.",
+			"Those who cannot acknowledge themselves, will eventually fail."
+		]
+	},
+	"6": {
+		"name": "Jiraiya",
+		"img": "http://images5.fanpop.com/image/photos/27000000/Jiraiya-Shippuden-jiraiya-27070582-500-375.jpg",
+		"quotes": [
+			"Rejection is a part of any man’s life. If you can’t accept and move past rejection, or at least use it as writing material - you’re not a real man.",
+			"A place where someone still thinks about you is a place you can call home.",
+			"Getting dumped always makes a man stronger. But then again, men aren't meant to pursue happiness."
+		]
+	},
+	"7": {
+		"name": "Nara Shikamaru",
+		"img": "http://wallpaper.zone/thumb/4063236.jpg",
+		"quotes": [
+			"It’s because we help out when they’re in trouble that we can count on them to come running when we need it.",
+			"Laziness is the mother of all bad habits. But ultimately she is a mother and we should respect her.",
+			"It's not because I'm lazy, it's just because I don't care.",
+			"There's no advantage to hurrying through life.",
+			"It's stupid to talk about things you're not. Be yourself and you'll be fine.",
+			"I could say I'm not sad, but I'd be lying. The problem is the world won't let me stay a kid forever, so I can't lie around crying about it either.",
+			"He turned a room full of strangers into a room full of enemies with just one sentence.",
+			"About women, to his father, If women made you a better person, I wouldn't want to know what you were like before."
+		]
+	},
+	"8": {
+		"name": "Sasuke Uchiha",
+		"img": "https://lh3.googleusercontent.com/oR7FeXdknqmGvJLAg-rxOienP7Jw2r39E7Qe-dBYZuObnTFDt2RTQ9YKCZB1T46SvpvG9Aw=s630-fcrop64=1,183c0000ff9ee722",
+		"quotes": [
+			"Tears and rain, fall down on my face, my body is unable to stay yet my heart is unwilling to leave.",
+			"I understand now. Even if I must take the devil's fruit, I must gain power. I am an avenger.",
+			"I have told you before, I'm an avenger. I don't care about this test, Chunin or whatever. 'Am I strong?' that's the answer I want.",
+			"Don't worry, this will be over in five seconds.",
+			"I have long since closed my eyes... My only goal is in the darkness.",
+			"You're such a loser, Naruto."
+		]
+	},
+	"9": {
+		"name": "Hatake Kakashi",
+		"img": "http://66.media.tumblr.com/c9ab0c6669227572a7dea2f10571f25b/tumblr_nm92f3gGHF1qmmhnro1_500.png",
+		"quotes": [
+			"I've been around longer than you have, kid. And I've seen my share of troubles. You're not the only one who knows what it's like to lose somebody. It looks like neither of us has led a charming life, have we? Still, it's not that bad. At least you and I have been lucky enough to find new comrades to help fill the void.",
+			"If comrades that you trust gather around you, hope can take physical form and become visible. That`s what I believe...",
+			"Forget about revenge. The fate of those who seek revenge is grim. It's tragic, You will end up suffering and hurting yourself even more. Even if you do succeed in getting revenge, the only thing that remains is emptiness.",
+			"Some people want power and they get mad when they don't get it. They take their fury out on everyone else. You don't want it, it becomes you.",
+			"I'm Hatake Kakashi. Things I like and things I hate? I don't feel like telling you that. My dreams for the future? Never really thought about that. As for my hobbies... I have lots of hobbies."
+		]
+	},
+	"10": {
+		"name": "Naruto Uzumaki",
+		"img": "http://cloud.attackofthefanboy.com/wp-content/uploads/2016/02/Naruto-1.jpg?ee7db4",
+		"quotes": [
+			"Because they saved me from myself, they rescued me from my loneliness. They were the first to accept me for who I am. They're my friends.",
+			"Once you question your own belief, it's over.",
+			"Don't underestimate me! I don't quit and I don't run! You can act tough all you want! You're not gonna scare me off! No way! I don't care if I DO get stuck as a Genin for the rest of my life! I'll still be Hokage someday!",
+			"People who continue to put their lives on the line to defend their faith become heroes and continue to exist on in legend.",
+			"Hard work is worthless for those that don't believe in themselves."
+		]
+	},
+	"11": {
+		"name": "Haku",
+		"img": "http://static.comicvine.com/uploads/original/11126/111262115/5029537-8655964559-48139.jpg",
+		"quotes": [
+			"It is only through the eyes of others that our lives have any meaning."
+		]
+	},
+	"12": {
+		"name": "Onoki",
+		"img": "http://vignette2.wikia.nocookie.net/naruto/images/4/49/Onoki.PNG/revision/20141111212222?path-prefix=pt-br",
+		"quotes": [
+			"Never give up without even trying. Do what you can, no matter how small the effect it may have!"
+		]
+	},
+	"13": {
+		"name": "Obito Uchiha",
+		"img": "http://i0.wp.com/www.lazygamer.net/images//2015/05/Obito-Uchiha.jpg",
+		"quotes": [
+			"No one cared who I was until I put on a mask.",
+			"I'm no one. I don't want to be anyone. All I care about is completing the moon's eye plan. This world is completely worthless. There is nothing left in it but misery.",
+			"It's too late to regret. Reality is just cruelly moving forward."
+		]
+	},
+	"14": {
+		"name": "Madara Uchiha",
+		"img": "http://images6.fanpop.com/image/quiz/1075000/1075833_1391411790199_500_281.png",
+		"quotes": [
+			"...Would you consider dying together \"Teamwork\" as well?",
+			"Wake up to reality! Nothing ever goes as planned in this world. The longer you live, the more you realize that in this reality only pain, suffering and futility exist.",
+			"Power is not will, it is the phenomenon of physically making things happen.",
+			"Don't improvise what you cannot handle."
+		]
+	},
+	"15": {
+		"name": "Chouji Akimichi",
+		"img": "http://static.tumblr.com/ep7g3cn/9PEmdn0rl/choji.jpg",
+		"quotes": [
+			"You can steal the very last bite of my very best food. You can mock me all you want. But if you insult my best friend, I will obliterate you.",
+			"I can't forgive you for calling me fat! But even more than that... Not just for stealing the last chip... or calling me fat... most importantly I won't forgive anyone who insults my best friend!",
+			"To Shikamaru, I won't let even YOU eat the last barbecue chip!"
+		]
+	},
+	"16": {
+		"name": "Might Guy",
+		"img": "https://i.ytimg.com/vi/jKhCvkblx-w/hqdefault.jpg",
+		"quotes": [
+			"You're right, all efforts are pointless... If you don't believe in yourself."
+		]
+	},
+	"17": {
+		"name": "Orochimaru",
+		"img": "http://fc04.deviantart.net/fs70/i/2012/269/a/a/orochimaru_tongue_action_7_by_naga07-d36aejb.jpg",
+		"quotes": [
+			"Either people change or they die before they do. It's one or the other.",
+			"It's human nature not to realize the true value of something, unless they lose it.",
+			"Real power is forged from the desire smoldering in the heart. It fans into a flame and begins to burn with an intensity scarcely imagined to be possible.",
+			"True power is forged from the desire smoldering in the heart, it fans into a flame and begins to burn with an intensity one scarcely imagines to be possible...",
+			"Darkness. When everything that you know and love is taken away from you so harshly. All you can think about is anger, hatred and even revenge. And no one can save you.",
+			"When there is a true desire in the heart and that desire is strong... That is when he finds real strength that even he did not know he had!",
+			"There probably isn't any meaning in life. Perhaps you can find something interesting to do while you are alive. Like how you found that flower. Like how I found you."
+		]
+	}
+}
+    </script>
+  </body>
+</html>

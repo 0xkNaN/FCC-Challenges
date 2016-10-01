@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Josefin+Sans|Poppins|Quicksand" rel="stylesheet">
+    <style>
+      body{
+        padding: 0px;
+        background: #fff;
+      }
+
+      .container{
+        margin-bottom: 50px;
+      }
+
+      .header{
+        text-align: center;
+        padding: 30px 0px;
+      }
+
+      .title{
+        color: #6b6b6b;
+        font-size: 50px;
+        font-family: cursive;
+        margin-bottom: 30px;
+      }
+
+      input[type=text]{
+        border: 2px solid #6b6b6b;
+        border-radius: 10px;
+        padding: 1px;
+        padding-left: 35px;
+        width: 25%;
+        font-size: 19px;
+        font-family: cursive;
+        margin-bottom: 20px;
+      }
+      input[type=text]:focus{
+        outline-width: 0;
+      }
+
+      .random{
+        font-size: 16px;
+        font-family: cursive;
+      }
+
+      a, a:hover, a:focus{
+        color: #658c6c;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      img{
+        display: block;
+        width: 25%;
+        margin: auto;
+      }
+
+      li{
+        padding: 10px 30px;
+        margin-bottom: 10px;
+        background-color: rgba(0,0,0,0.03);
+        list-style: none;
+        font-family: 'Poppins';
+        font-size: 16px;
+      }
+
+      .search-container{
+        position: relative;
+      }
+
+      .search-container i.glyphicon-search{
+        position: absolute;
+        padding: 10px 12px;
+        pointer-events: none;
+      }
+
+      h4{
+        font-size: 24px;
+        font-weight: bold;
+        font-family: 'Josefin Sans';
+      }
+
+      .carrer-header{
+        font-size: 26px;
+        font-family: 'Josefin Sans';
+        margin-bottom: 15px;
+      }
+
+      footer{
+        padding: 5px;
+        position: fixed;
+        bottom: 0px;
+        border-top: 1px solid #156;
+        width: 100%;
+        text-align: center;
+        background-color: #fff;
+        font-size: 13px;
+        font-style: oblique;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 class="title">Wikipedia Viewer</h1>
+        <div class="search-container"> 
+          <i class="glyphicon glyphicon-search"></i>
+          <input id="search-query"type="Text" placeholder="Search...">
+        </div>
+        <a class="random" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Topic ?</a>
+      </div>
+      <!-- Results -->
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1122px-Wikipedia-logo-v2.svg.png" alt="wikipedia logo">
+      <ul id="search-result"></ul>
+    </div>
+    <footer>
+      Designed and coded by <a href="https://www.freecodecamp.com/hassenrmili" target="_blank">Hassen Rmili</a>.
+    </footer>
+    
+    <script>
+      $(function(){  
+        $("#search-query").on("change", function(){
+          var q = $("#search-query").val();
+          var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+q+"&format=json&callback=?";
+          //$("#search-result").html(url+"<br>");
+          if(q !== ""){  
+            $.ajax({
+              url: url,
+              type: 'GET',
+              dataType:'json',
+              success: function(data){
+                //console.log(data);
+                //console.log("data_length= "+data[1].length);
+                //...
+                $("img").css("display", "none");
+                $("ul").empty();
+                if(data[1].length == 0){
+                  console.log("there is not return!");
+                  $("#search-result").append("<li><h4>'"+q+"' does not exist</h4><span>There were no results matching the query.You can <a href='https://en.wikipedia.org/wiki/Wikipedia:Articles_for_creation' target='_blank'>ask for it to be created</a>.</span></li>");
+                }
+                for(var i =0; i < data[1].length; i++){
+                  $("#search-result").append("<li><h4>"+data[1][i]+ "</h4><span>"+data[2][i]+"</span>..<a href='"+data[3][i]+"' target='_blank'> Continue reading</a></li>");
+                }
+            }});
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
