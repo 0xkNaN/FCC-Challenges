@@ -218,4 +218,125 @@ function spinalCase(str) {
   }).replace(/\s/g, "-").toLowerCase();
 }
 
+*Roman Numeral Converter:
+var _base = {0: ["I","V"],1: ["X","L"],2: ["C","D"],3: ["M"]};
+	function convertToRoman(num){
+		function test(_i,idx){
+			if(3 <= idx){return _base[idx][0].repeat(_i);}
+			var _f = _base[idx][0];
+			var _s = _base[idx][1];
+			var _final = "";
+			var _idx = _i - 5;
+			switch (_idx){
+				case -4:
+					_final = _f.repeat(1);
+					break;
+				case -3:
+					_final = _f.repeat(2);
+					break;
+				case -2:
+					_final = _f.repeat(3);
+					break;
+				case -1:
+					_final = _f.repeat(1) + _s;
+					break;
+				case 0:
+					_final = _s;
+					break;
+				case 1:
+					_final = _s + _f.repeat(1);
+					break;
+				case 2:
+					_final = _s + _f.repeat(2);
+					break;
+				case 3:
+					_final = _s + _f.repeat(3);
+					break;
+				case 4:
+					_final = _f.repeat(1) + _base[idx + 1][0];
+					break;
+			}
+			return _final;
+		}
+		var _ret = [];
+		var _str = num.toString();
+		var size = _str.length;
+		for(var _int in _str){
+			var _count = size - Number(_int) - 1;
+			if(_str[_count] === 0){continue;}
+			_ret.push(test(_str[_count], Number(_int)));
+		}
+		
+		return _ret.reverse().join().replace(/,/g, "");
+	}
+	
+*Convert HTML Entities
+function convertHTML(str) {
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;");
+}
+
+*Pig Latin:
+function translatePigLatin(str) {
+  var _str = "";
+  
+  if(str.match(/^[aeiouy]/)){_str = str + "way";}
+  else{
+    str.replace(/[aeiouy](?![aeiouy])/,function(){
+      _str = str.slice(str.indexOf(arguments[0])) + str.slice(0, str.indexOf(arguments[0])) + "ay";
+    });
+  }
+  return _str;
+}
+
+*Wherefore art thou:
+function whatIsInAName(collection, source) {
+  // What's in a name?
+  var arr = [];
+  // Only change code below this line
+  collection.forEach(function(a){ if(Object.keys(source).every(function(b){return a[b] === source[b];})) arr.push(a); });
+  // Only change code above this line
+  return arr;
+}
+
+*DNA Pairing:
+function pairElement(str) {
+  var _ret = [], _db = {"A": ["A","T"], "T": ["T","A"], "C": ["C","G"], "G": ["G","C"]};
+  str.replace(/[ATCG]/g, function(z){_ret.push(_db[z]);});
+  return _ret;
+}
+
+*Everything Be True:
+function truthCheck(collection, pre) {
+  // Is everyone being true?
+  return collection.every(function(_obj){ return Boolean(_obj[pre]); });
+}
+
+*Boo who:
+function booWho(bool) {
+  // What is the new fad diet for ghost developers? The Boolean.
+  return typeof(bool) === "boolean";
+}
+
+*Sorted Union:
+// Concat all arguments and filter them.
+function uniteUnique() {
+  var _args = arguments, _ret = [];
+  Object.keys(arguments).forEach(function(_key){_ret = _ret.concat(_args[_key]);});
+  return _ret.filter(function(_c,_p){ return _ret.slice(0,_p).indexOf(_c) === -1; });
+}
+
+*Sum All Odd Fibonacci Numbers:
+function sumFibs(num) {
+  var _ret = 0, x = 0, y = 0, z = 1;
+  while( z <= num){
+    _ret += ((z % 2 === 1)? z : 0);
+    //...
+    x = y;
+    y = z;
+    z = y + x;
+  }
+  
+  return _ret;
+}
+
 *
