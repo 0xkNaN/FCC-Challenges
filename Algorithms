@@ -11,8 +11,6 @@ function factorialize(num) {
 	arr.push(i+1);
   }
   num = arr.reduce(function(preVal, currVal){return preVal * currVal;});
-  
-  //...
   return num;
 }
 
@@ -29,7 +27,6 @@ function findLongestWord(str) {
   for(var i = 1; i < arr.length; i++){
     if(l_word.length < arr[i].length){l_word = arr[i];}
   }
-  //...
   return l_word.length;
 }
 
@@ -43,7 +40,6 @@ function titleCase(str) {
       if(j === 0){str = str.concat(arr[i][j].toUpperCase());}
       else{str = str.concat(arr[i][j].toLowerCase());}
     }
-    
     if(i < arr.length - 1){str += " ";}
   }
 
@@ -188,7 +184,6 @@ function sumAll(arr) {
 *Diff Two Arrays:
 function diffArray(arr1, arr2) {
   var newArr = [], _arr = arr1.concat(arr2);
-  
   for(var i = 0; i < _arr.length; i++){
     if(arr1.indexOf(_arr[i]) == -1 && 0 <= arr2.indexOf(_arr[i]) || 0 <= arr1.indexOf(_arr[i]) && arr2.indexOf(_arr[i]) == -1){
       newArr.push(_arr[i]);
@@ -290,11 +285,8 @@ function translatePigLatin(str) {
 
 *Wherefore art thou:
 function whatIsInAName(collection, source) {
-  // What's in a name?
   var arr = [];
-  // Only change code below this line
   collection.forEach(function(a){ if(Object.keys(source).every(function(b){return a[b] === source[b];})) arr.push(a); });
-  // Only change code above this line
   return arr;
 }
 
@@ -307,18 +299,15 @@ function pairElement(str) {
 
 *Everything Be True:
 function truthCheck(collection, pre) {
-  // Is everyone being true?
   return collection.every(function(_obj){ return Boolean(_obj[pre]); });
 }
 
 *Boo who:
 function booWho(bool) {
-  // What is the new fad diet for ghost developers? The Boolean.
   return typeof(bool) === "boolean";
 }
 
 *Sorted Union:
-// Concat all arguments and filter them.
 function uniteUnique() {
   var _args = arguments, _ret = [];
   Object.keys(arguments).forEach(function(_key){_ret = _ret.concat(_args[_key]);});
@@ -362,7 +351,6 @@ function findElement(arr, func) {
 
 *Drop it:
 function dropElements(arr, func) {
-  // Drop them elements.
   var _idx = arr.indexOf(arr.filter(func)[0]);
   return ((_idx !== -1) ? arr.slice(_idx) : []);
 }
