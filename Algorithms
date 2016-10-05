@@ -372,4 +372,19 @@ function binaryAgent(str) {
   return str.split(" ").map(function(a){return String.fromCharCode(parseInt(a,2));}).join("");
 }
 
+*Smallest Common Multiple
+function smallestCommons(arr) {
+  var _inputs = [];
+  for(var i = Math.min(arr[0],arr[1]); i <= Math.max(arr[0],arr[1]); i++){_inputs.push(i);}
+  return _inputs.reduce(function(a,b){
+    var _a = a, _b = b;
+    do{
+      if(_a < _b){_a += a;}
+      if(_b < _a){_b += b;}
+    }while(_a !== _b);
+
+    return _a;
+  });
+}
+
 *
