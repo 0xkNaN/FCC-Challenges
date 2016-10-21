@@ -375,4 +375,23 @@ function smallestCommons(arr) {
   });
 }
 
-*
+*Steamroller 
+function steamrollArray(arr) {
+  var _ret = [];
+
+  arr.forEach(function(_t){
+    var _tmp = _t;
+    
+    do{
+      var _fl = [];
+      !Array.isArray(_tmp)? _fl.push(_tmp) : _tmp.forEach(function(_t){return !Array.isArray(_t)? _fl.push(_t) : _fl.push(..._t);});
+      _tmp = _fl;
+    }while(_tmp.every(function(_t){ return Array.isArray(_t) === false; }) === false)
+
+    _tmp.forEach(function(_t){ return _ret.push(_t);}); 
+  });
+  return _ret;
+}
+
+steamrollArray([[[["a"]], [["b"]]],[1, [2], [3, [[4]]]],[1, [], [3, [[4]]]],[1, {}, [3, [[4]]]]]);
+
