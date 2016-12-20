@@ -524,23 +524,20 @@ var tic = {
 						var win = "";
 						tic.currGameState = tic.gameStates[2];
 						
-						switch(remBoxes.length) {
-							case 9 :
+						tic.boxesWinList.forEach(function(box) {
+							var plWin = box.every(function(bx) { return -1 < tic.playerMoves.indexOf(bx); });
+							var aiWin = box.every(function(bx) { return -1 < tic.aiMoves.indexOf(bx); });
+							if(plWin === true) {winners.push("you win !"); winners.push(box); winners.push("player");}
+							if(aiWin === true) {winners.push("ai win !"); winners.push(box); winners.push("ai");}
+						});
+						if(winners.length === 0) {
+							if (remBoxes.length === 9){
 								win = winStates[0];
-								break;
-							default :
-								tic.boxesWinList.forEach(function(box) {
-									var plWin = box.every(function(bx) { return -1 < tic.playerMoves.indexOf(bx); });
-									var aiWin = box.every(function(bx) { return -1 < tic.aiMoves.indexOf(bx); });
-									if(plWin === true) {winners.push("you win !"); winners.push(box); winners.push("player");}
-									if(aiWin === true) {winners.push("ai win !"); winners.push(box); winners.push("ai");}
-								});
-								if(winners.length === 0) {
-									win = winStates[2];
-								} else {
-									win = winStates[1];
-								}
-								break;
+							} else {
+								win = winStates[2];
+							}
+						} else {
+							win = winStates[1];
 						}
 						
 						switch(win) {
