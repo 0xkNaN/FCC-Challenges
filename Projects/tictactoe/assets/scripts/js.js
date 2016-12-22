@@ -517,7 +517,7 @@ var tic = {
 								break;
 						}
 					},
-	endGame       : function(pinger, remBoxes) {
+	endGame       : function(pinger) {
 						var winStates = ["draw", "yes", "no"];
 						var remBoxes = tic.playerMoves.concat(tic.aiMoves);
 						var winners = [];
